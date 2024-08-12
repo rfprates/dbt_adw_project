@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: dim_salespersons
+    description: dim table with informations about sales persons
+    columns:
+      - name: salesperson_sk
+        description: the surrogate key of dim sales persons table
+        tests:
+          - unique
+          - not_null
+      
+      - name: salesperson_id
+        description: primary key of salesperson
+        tests:
+          - unique
+          - not_null
+      
+      - name: salesytd
+        description: sales total year to date
+
+      - name: saleslastyear
+        description: sales total of previous year
+
+      - name: loginid
+        description: identification for each employee
+
+      - name: fullname
+        description: employee full name
+
+      - name: persontype
+        description: primary type of person
