@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: dim_salesreasons
+    description: dim table with informations about sales reasons
+    columns:
+      - name: salesreason_sk
+        description: the surrogate key of dim sales reasons table
+        tests:
+          - unique
+          - not_null
+      
+      - name: salesorderid
+        description: foreign key of sales orders
+        tests:
+          - not_null
+
+      - name: reason_description
+        description: description of the reason for purchase
+
+      - name: reason_type
+        description: type of reason for each sale
