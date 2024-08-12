@@ -38,6 +38,11 @@ sources:
             tests:
               - unique
               - not_null
+          - name: loginid 
+            description: unique key for each employee
+            tests:
+              - unique
+              - not_null
       - name: salesperson
         description: Sales person table
         columns:
