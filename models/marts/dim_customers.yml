@@ -12,20 +12,12 @@ models:
       
       - name: customerid
         description: primary key of customers
-      
-      - name: personbusinessentityid
-        description: businessentityid column renamed, is the primary key of persons table
+        tests:
+          - unique
+          - not_null
 
       - name: fullname
         description: the person name. Adopted as customer_fullname when person name is not null
 
-      - name: storebusinessentityid
-        description: businessentityid column renamed, is the primary key of store table
-
       - name: storename
         description: the store name. Adopted as customer_fullname when person name is null
-
-      - name: customer_fullname
-        description: the customer full name
-        tests:
-          - not_null
