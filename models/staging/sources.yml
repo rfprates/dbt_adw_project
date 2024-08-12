@@ -1,0 +1,114 @@
+version: 2
+
+sources:
+  - name: sap_adw
+    database: adw-project-431916
+    schema: sap_adw
+    description: this is Adventure Works SAP database
+    tables:
+      - name: store
+        description: Table with informations about the stores that use to buy on Adventure Works
+        columns:
+          - name: businessentityid
+            description: primary key of store table
+            tests:
+              - unique
+              - not_null
+      - name: customer
+        description: Main table of customers of Adventure Works
+        columns:
+          - name: customerid
+            description: primary key of customers table
+            tests:
+              - unique
+              - not_null
+      - name: person
+        description: Main table of informations about all persons related to Adventure Works, including employees and customers
+        columns:
+          - name: businessentityid
+            description: primary key of person table
+            tests:
+              - unique
+              - not_null
+      - name: employee
+        description: Table to link  person table with sales person table
+        columns:
+          - name: businessentityid
+            description: primary key of employee table
+            tests:
+              - unique
+              - not_null
+      - name: salesperson
+        description: Sales person table
+        columns:
+          - name: businessentityid
+            description: primary key of sales person table
+            tests:
+              - unique
+              - not_null
+      - name: address
+        description: Table with address information for each sale
+        columns:
+          - name: addressid
+            description: primary key of address table
+            tests:
+              - unique
+              - not_null
+      - name: stateprovince
+        description: Table with name of the state or province for each sale
+        columns:
+          - name: stateprovinceid
+            description: primary key of state province table
+            tests:
+              - unique
+              - not_null
+      - name: countryregion
+        description: Table with name of the country for each sale
+        columns:
+          - name: countryregioncode
+            description: primary key of country region table
+            tests:
+              - unique
+              - not_null
+      - name: salesorderheader
+        description: Main table of sales
+        columns:
+          - name: salesorderid
+            description: primary key of sales order header table
+            tests:
+              - unique
+              - not_null
+      - name: salesorderdetail
+        description: Table with sales detail
+        columns:
+          - name: salesorderdetailid
+            description: primary key of sales order detail table
+            tests:
+              - unique
+              - not_null
+      - name: product
+        description: Main product table
+        columns:
+          - name: productid
+            description: primary key of product table
+            tests:
+              - unique
+              - not_null
+      - name: salesorderheadersalesreason
+        description: Table to link sales reason to sales order header
+      - name: salesreason
+        description: Table with sales reason information
+        columns:
+          - name: salesreasonid
+            description: primary key of sales reason table
+            tests:
+              - unique
+              - not_null
+      - name: creditcard
+        description: Table with credit card infomation
+        columns:
+          - name: creditcardid
+            description: primary key of credit card table
+            tests:
+              - unique
+              - not_null
