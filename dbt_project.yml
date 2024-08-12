@@ -37,6 +37,10 @@ models:
       +materialized: view
       +schema: stg
 
+    marts:
+      +materialized: view
+      +schema: marts 
+
 
 seeds:
   adventure_works:
