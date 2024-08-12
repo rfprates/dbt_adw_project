@@ -4,7 +4,7 @@ with
             salesorderid
             , customerid
             , salespersonid
-            , billtoaddressid
+            , shiptoaddressid
             , creditcardid
             , orderdate
             , status
