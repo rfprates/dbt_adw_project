@@ -34,7 +34,8 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   adventure_works: 
     staging:
-      materialized: view
+      +materialized: view
+      +schema: stg
 
 
 seeds:

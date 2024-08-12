@@ -2,7 +2,7 @@ with
     country_region as (
         select
             countryregioncode
-            , name as country
+            , name as country_name
         from {{ source("sap_adw", "countryregion") }}
     )
 select *
