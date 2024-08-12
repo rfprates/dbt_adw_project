@@ -2,7 +2,7 @@ with
     state_province as (
         select
             stateprovinceid
-            , name as state_name
+            , name as state
         from {{ source("sap_adw", "stateprovince") }}
     )
 select *
