@@ -3,7 +3,7 @@ with
         select
             territoryid
             , countryregioncode
-            , `group` as continent
+            , `group` as group_territory
         from {{ source("sap_adw", "salesterritory") }}
     )
 select *
