@@ -8,27 +8,53 @@ with
     )
     , stg_person as (
         select
-            businessentityid as personbusinessentityid
+            businessentityid as personid
             , concat(ifnull(firstname,' '),' ',ifnull(middlename,' '),' ',ifnull(lastname,' ')) as fullname
             , persontype
         from {{ ref('stg_person') }}
     )
     , stg_store as (
         select
-            businessentityid as storebusinessentityid
+            businessentityid as storeid
             , store
         from {{ ref('stg_store') }}
     )
-    , joined as (
+    , stg_personcreditcard as (
         select
-            {{ dbt_utils.generate_surrogate_key(['customerid', 'personid', 'storeid']) }} as customer_sk  
-            , stg_customer.customerid
+            businessentityid as personcreditcardid
+            , creditcardid
+        from {{ ref('stg_personcreditcard') }}
+    )
+    , stg_creditcard as (
+        select
+            creditcardid
+            , cardtype
+        from {{ ref('stg_creditcard') }}
+    )
+    , join_person_card as (
+        select
+            stg_person.personid
+            , stg_creditcard.creditcardid
             , stg_person.fullname
             , stg_person.persontype
+            , stg_creditcard.cardtype
+        from stg_person
+        left join stg_personcreditcard on stg_person.personid = stg_personcreditcard.personcreditcardid
+        left join stg_creditcard on stg_personcreditcard.creditcardid = stg_creditcard.creditcardid
+    )
+    , joined as (
+        select
+            {{ dbt_utils.generate_surrogate_key(['customerid']) }} as customer_sk  
+            , stg_customer.customerid
+            , join_person_card.personid
+            , join_person_card.creditcardid
+            , join_person_card.fullname
+            , join_person_card.persontype
+            , join_person_card.cardtype
             , stg_store.store
         from stg_customer
-        left join stg_person on stg_customer.personid = stg_person.personbusinessentityid
-        left join stg_store on stg_customer.storeid = stg_store.storebusinessentityid
+        left join join_person_card on stg_customer.personid = join_person_card.personid
+        left join stg_store on stg_customer.storeid = stg_store.storeid
     )
 select *
 from joined
