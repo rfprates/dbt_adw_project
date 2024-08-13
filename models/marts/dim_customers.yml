@@ -11,13 +11,22 @@ models:
           - not_null
       
       - name: customerid
-        description: primary key of customers
+        description: primary key for all customers, persons or stores
         tests:
           - unique
           - not_null
+      
+      - name: personid
+        description: key of customers which are not stores
 
+      - name: creditcardid
+        description: key of customer's credit cards which are not stores
+      
       - name: fullname
-        description: the person name. Adopted as customer_fullname when person name is not null
+        description: the person name
 
-      - name: storename
-        description: the store name. Adopted as customer_fullname when person name is null
+      - name: persontype
+        description: type of each person register on table of customers
+
+      - name: store
+        description: the store name
