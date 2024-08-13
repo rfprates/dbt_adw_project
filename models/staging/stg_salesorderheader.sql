@@ -6,6 +6,7 @@ with
             , salespersonid
             , shiptoaddressid
             , creditcardid
+            , territoryid
             , orderdate
             , status
         from {{ source("sap_adw", "salesorderheader") }}
