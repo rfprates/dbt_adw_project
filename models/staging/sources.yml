@@ -30,6 +30,22 @@ sources:
             tests:
               - unique
               - not_null
+      - name: personcreditcard
+        description: Table mapping people to their credit card information
+        columns:
+          - name: businessentityid
+            description: primary key of person credit card table
+            tests:
+              - unique
+              - not_null
+      - name: creditcard
+        description: Table with credit card infomation
+        columns:
+          - name: creditcardid
+            description: primary key of credit card table
+            tests:
+              - unique
+              - not_null
       - name: employee
         description: Table to link  person table with sales person table
         columns:
@@ -75,6 +91,14 @@ sources:
             tests:
               - unique
               - not_null
+      - name: salesterritory
+        description: Geographic area to which the sales territory belong
+        columns:
+          - name: territoryid
+            description: primary key of sales territory table
+            tests:
+              - unique
+              - not_null
       - name: salesorderheader
         description: Main table of sales
         columns:
@@ -99,6 +123,22 @@ sources:
             tests:
               - unique
               - not_null
+      - name: productsubcategory
+        description: Subcategory description of all products
+        columns:
+          - name: productsubcategoryid
+            description: primary key of product subcategory table
+            tests:
+              - unique
+              - not_null
+      - name: productcategory
+        description: Category description of all products
+        columns:
+          - name: productcategoryid
+            description: primary key of product category table
+            tests:
+              - unique
+              - not_null 
       - name: salesorderheadersalesreason
         description: Table to link sales reason to sales order header
       - name: salesreason
@@ -106,14 +146,6 @@ sources:
         columns:
           - name: salesreasonid
             description: primary key of sales reason table
-            tests:
-              - unique
-              - not_null
-      - name: creditcard
-        description: Table with credit card infomation
-        columns:
-          - name: creditcardid
-            description: primary key of credit card table
             tests:
               - unique
               - not_null
