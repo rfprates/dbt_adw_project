@@ -10,7 +10,14 @@ with
         select
             businessentityid as personid
             , concat(ifnull(firstname,' '),' ',ifnull(middlename,' '),' ',ifnull(lastname,' ')) as fullname
-            , persontype
+            , case
+                when persontype = "SC" then "Store contact"
+                when persontype = "IN" then "Individual customer"
+                when persontype = "SP" then "Sales person"
+                when persontype = "EM" then "Employee"
+                when persontype = "VC" then "Vendor contact"
+                when persontype = "GC" then "General contact"
+            end as persondescription
         from {{ ref('stg_person') }}
     )
     , stg_store as (
@@ -34,9 +41,8 @@ with
     , join_person_card as (
         select
             stg_person.personid
-            , stg_creditcard.creditcardid
             , stg_person.fullname
-            , stg_person.persontype
+            , stg_person.persondescription
             , stg_creditcard.cardtype
         from stg_person
         left join stg_personcreditcard on stg_person.personid = stg_personcreditcard.personcreditcardid
@@ -47,9 +53,9 @@ with
             {{ dbt_utils.generate_surrogate_key(['customerid']) }} as customer_sk  
             , stg_customer.customerid
             , join_person_card.personid
-            , join_person_card.creditcardid
+            , stg_store.storeid
             , join_person_card.fullname
-            , join_person_card.persontype
+            , join_person_card.persondescription
             , join_person_card.cardtype
             , stg_store.store
         from stg_customer
