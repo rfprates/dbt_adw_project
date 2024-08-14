@@ -27,7 +27,7 @@ with
                 when persontype = "EM" then "Employee"
                 when persontype = "VC" then "Vendor contact"
                 when persontype = "GC" then "General contact"
-            end as person_description
+            end as persondescription
         from {{ ref('stg_person') }}
     )
     , stg_salesterritory as (
@@ -57,7 +57,7 @@ with
             joined_salesperson_territory.salespersonid
             , stg_person.fullname
             , stg_employee.jobtitle
-            , stg_person.person_description
+            , stg_person.persondescription
             , joined_salesperson_territory.salesquota
             , joined_salesperson_territory.bonus
             , joined_salesperson_territory.salesytd
