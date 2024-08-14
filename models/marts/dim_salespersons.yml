@@ -5,7 +5,7 @@ models:
     description: dim table with informations about sales persons
     columns:
       - name: salespersonid
-        description: primary key of salesperson
+        description: primary key of sales persons dim table
         tests:
           - unique
           - not_null
@@ -16,7 +16,7 @@ models:
       - name: jobtitle
         description: work title such as Buyer or Sales Representative
       
-      - name: person_description
+      - name: persondescription
         description: primary type of the person
       
       - name: salesquota
@@ -37,8 +37,8 @@ models:
       - name: countryregioncode
         description: primary key of salesperson
 
-      - name: country_region
+      - name: countryregion
         description: sales territory description
       
-      - name: territory_group
+      - name: territorygroup
         description: geographic area to which the sales territory belong
