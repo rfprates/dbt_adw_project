@@ -9,6 +9,21 @@ models:
         tests:
           - unique
           - not_null
+
+      - name: fullname
+        description: full name of the sales person
+      
+      - name: jobtitle
+        description: work title such as Buyer or Sales Representative
+      
+      - name: person_description
+        description: primary type of the person
+      
+      - name: salesquota
+        description: projected yearly sales.
+
+      - name: bonus
+        description: 	bonus due if quota is met.
       
       - name: salesytd
         description: sales total year to date
@@ -16,11 +31,14 @@ models:
       - name: saleslastyear
         description: sales total of previous year
 
-      - name: loginid
-        description: identification for each employee
+      - name: comissionpct
+        description: commision percent received per sale
 
-      - name: fullname
-        description: employee full name
+      - name: countryregioncode
+        description: primary key of salesperson
 
-      - name: persontype
-        description: primary type of person
+      - name: country_region
+        description: sales territory description
+      
+      - name: territory_group
+        description: geographic area to which the sales territory belong
