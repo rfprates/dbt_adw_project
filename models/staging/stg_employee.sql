@@ -2,7 +2,7 @@ with
     employee as (
         select
             businessentityid
-            , loginid
+            , jobtitle
         from {{ source("sap_adw", "employee") }}
     )
 select *
