@@ -17,16 +17,19 @@ models:
           - not_null
       
       - name: personid
-        description: key of customers which are not stores
-
-      - name: creditcardid
-        description: key of customer's credit cards which are not stores
+        description: primary key for persons customers
+      
+      - name: storeid
+        description: primary key for stores
       
       - name: fullname
         description: the person name
 
-      - name: persontype
-        description: type of each person register on table of customers
+      - name: persondescription
+        description: primary type of the person
 
+      - name: cardtype
+        description: credit card name
+      
       - name: store
         description: the store name
