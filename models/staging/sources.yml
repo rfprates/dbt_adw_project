@@ -92,7 +92,7 @@ sources:
               - unique
               - not_null
       - name: salesterritory
-        description: Geographic area to which the sales territory belong
+        description: Sales territory table
         columns:
           - name: territoryid
             description: primary key of sales territory table
