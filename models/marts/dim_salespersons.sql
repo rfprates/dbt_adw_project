@@ -54,7 +54,7 @@ with
     )
     , joined as (
         select
-            {{ dbt_utils.generate_surrogate_key(['salespersonid']) }} as salesperson_sk
+            {{ dbt_utils.generate_surrogate_key(['salespersonid']) }} as salespersons_sk
             , joined_salesperson_territory.salespersonid
             , stg_person.fullname
             , stg_employee.jobtitle
