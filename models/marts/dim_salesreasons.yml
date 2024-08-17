@@ -4,7 +4,7 @@ models:
   - name: dim_salesreasons
     description: dim table with informations about sales reasons
     columns:
-      - name: salesreason_sk
+      - name: salesreasons_sk
         description: the surrogate key of dim sales reasons table
         tests:
           - unique
