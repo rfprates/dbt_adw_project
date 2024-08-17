@@ -4,7 +4,7 @@ models:
   - name: dim_customers
     description: Dim table of customers/stores
     columns:
-      - name: customer_sk
+      - name: customers_sk
         description: the surrogate key of dim customers table
         tests:
           - unique
