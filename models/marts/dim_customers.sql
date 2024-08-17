@@ -50,7 +50,7 @@ with
     )
     , joined as (
         select
-            {{ dbt_utils.generate_surrogate_key(['customerid']) }} as customer_sk  
+            {{ dbt_utils.generate_surrogate_key(['customerid']) }} as customers_sk  
             , stg_customer.customerid
             , join_person_card.personid
             , stg_store.storeid
