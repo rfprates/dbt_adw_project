@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: fct_sales
+    description: fact table with main informations about sales
+    columns:
+      - name: products_fk
+        description: foreign key of dim_products table
+
+      - name: customers_fk
+        description: foreign key of dim_customers table
+
+      - name: locations_fk
+        description: foreign key of dim_locations table
+
+      - name: salespersons_fk
+        description: foreign key of dim_salespersons table
+      
+      - name: salesreasons_fk
+        description: foreign key of dim_salesreasons table
+      
+      - name: salesorderid
+        description: key of each sales order
+      
+      - name: unitprice
+        description: unit price of each product sold
+      
+      - name: orderqty
+        description: quantity of product on each sale
+      
+      - name: revenue
+        description: revenue of each order
+      
+      - name: status_description
+        description: order current status
+      
+      - name: orderdate
+        description: date the sales order was created
