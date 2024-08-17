@@ -4,7 +4,7 @@ models:
   - name: dim_salespersons
     description: dim table with informations about sales persons
     columns:
-      - name: salesperson_sk
+      - name: salespersons_sk
         description: surrogate key of sales persons dim table
         tests:
           - unique
