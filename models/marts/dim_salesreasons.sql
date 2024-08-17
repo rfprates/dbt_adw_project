@@ -14,7 +14,7 @@ with
     )
     , joined as (
         select
-            {{ dbt_utils.generate_surrogate_key(['salesorderid', 'salesreason_fk']) }} as salesreason_sk
+            {{ dbt_utils.generate_surrogate_key(['salesorderid', 'salesreason_fk']) }} as salesreasons_sk
             , salesorderid
             , reason_description
             , reason_type
