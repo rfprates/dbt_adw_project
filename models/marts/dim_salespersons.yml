@@ -4,8 +4,14 @@ models:
   - name: dim_salespersons
     description: dim table with informations about sales persons
     columns:
+      - name: salesperson_sk
+        description: surrogate key of sales persons dim table
+        tests:
+          - unique
+          - not_null
+
       - name: salespersonid
-        description: primary key of sales persons dim table
+        description: primary key of sales person
         tests:
           - unique
           - not_null
