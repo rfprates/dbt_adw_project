@@ -73,7 +73,7 @@ with customers as (
             ELSE 'no_status'
         end as status_description
         , stg_salesorderheader.orderdate
-    from stg_salesorderheader 
+    from stg_salesorderheader
     left join customers on stg_salesorderheader.customerid = customers.customerid
     left join salespersons on stg_salesorderheader.salespersonid = salespersons.salespersonid
     left join locations on stg_salesorderheader.shiptoaddressid = locations.addressid
