@@ -7,90 +7,131 @@ sources:
     description: this is Adventure Works SAP database
     tables:
       - name: store
-        description: Table with informations about the stores that use to buy on Adventure Works
+        description: table with informations about the stores that use to buy on Adventure Works
         columns:
           - name: businessentityid
-            description: primary key of store table
+            description: primary key of store
             tests:
               - unique
               - not_null
+
       - name: customer
-        description: Main table of customers of Adventure Works
+        description: main table of customers of Adventure Works
         columns:
           - name: customerid
-            description: primary key of customers table
+            description: primary key of customers
             tests:
               - unique
               - not_null
+          - name: storeid
+            description: foreign key for store
+            tests:
+              - relationships:
+                  field: businessentityid
+                  to: ref('stg_store')
+          - name: personid
+            description: foreign key for person
+            tests:
+              - relationships:
+                  field: businessentityid
+                  to: ref('stg_person')
+
       - name: person
-        description: Main table of informations about all persons related to Adventure Works, including employees and customers
+        description: main table of informations about all persons related to Adventure Works, including employees and customers
         columns:
           - name: businessentityid
-            description: primary key of person table
+            description: primary key of person
             tests:
               - unique
               - not_null
+
       - name: personcreditcard
-        description: Table mapping people to their credit card information
+        description: table mapping people to their credit card information
         columns:
           - name: businessentityid
-            description: primary key of person credit card table
+            description: primary key of person credit card
             tests:
               - unique
               - not_null
+          - name: creditcardid
+            description: Foreign key for credit card
+            tests:
+              - relationships:
+                  field: creditcardid
+                  to: ref('stg_creditcard')
+
       - name: creditcard
-        description: Table with credit card infomation
+        description: table with credit card infomation
         columns:
           - name: creditcardid
-            description: primary key of credit card table
+            description: primary key of credit card
             tests:
               - unique
               - not_null
+
       - name: employee
-        description: Table to link  person table with sales person table
+        description: table to link  person table with sales person
         columns:
           - name: businessentityid
-            description: primary key of employee table
+            description: primary key of employee
             tests:
               - unique
               - not_null
-          - name: loginid 
-            description: unique key for each employee
-            tests:
-              - unique
-              - not_null
+
       - name: salesperson
         description: Sales person table
         columns:
           - name: businessentityid
-            description: primary key of sales person table
+            description: primary key of sales person
             tests:
               - unique
               - not_null
+          - name: territoryid
+            description: foreign key for sales territory
+            tests:
+              - relationships:
+                  field: territoryid
+                  to: ref('stg_salesterritory')
+
       - name: address
-        description: Table with address information for each sale
+        description: table with address information for each sale
         columns:
           - name: addressid
             description: primary key of address table
             tests:
               - unique
               - not_null
+          - name: stateprovinceid
+            description: Foreign key for state province
+            tests:
+              - relationships:
+                  field: stateprovinceid
+                  to: ref('stg_stateprovince')
+
       - name: stateprovince
-        description: Table with name of the state or province for each sale
+        description: table with name of the state or province for each sale
         columns:
           - name: stateprovinceid
             description: primary key of state province table
             tests:
               - unique
               - not_null
+          - name: countryregioncode
+            description: foreign key for store table
+            tests:
+              - relationships:
+                  field: countryregioncode
+                  to: ref('stg_countryregion')
+
       - name: countryregion
-        description: Table with name of the country for each sale
+        description: table with name of the country for each sale
         columns:
           - name: countryregioncode
             description: primary key of country region table
             tests:
               - unique
               - not_null
+
       - name: salesterritory
         description: Sales territory table
         columns:
@@ -99,30 +140,82 @@ sources:
             tests:
               - unique
               - not_null
+
       - name: salesorderheader
-        description: Main table of sales
+        description: main table of sales
         columns:
           - name: salesorderid
             description: primary key of sales order header table
             tests:
               - unique
               - not_null
+          - name: customerid
+            description: foreign key for customer
+            tests:
+              - relationships:
+                  field: customerid
+                  to: ref('stg_customer')
+          - name: salespersonid
+            description: Foreign key for sales person
+            tests:
+              - relationships:
+                  field: businessentityid
+                  to: ref('stg_salesperson')
+          - name: shiptoaddressid
+            description: foreign key for address
+            tests:
+              - relationships:
+                  field: addressid
+                  to: ref('stg_address')
+          - name: creditcardid
+            description: foreign key for credit card
+            tests:
+              - relationships:
+                  field: creditcardid
+                  to: ref('stg_credticard')
+          - name: territoryid
+            description: Foreign key for sales territory
+            tests:
+              - relationships:
+                  field: territoryid
+                  to: ref('stg_salesterritory')
+
       - name: salesorderdetail
-        description: Table with sales detail
+        description: table with sales detail
         columns:
           - name: salesorderdetailid
             description: primary key of sales order detail table
             tests:
               - unique
               - not_null
+          - name: salesorderid
+            description: foreign key for sales order
+            tests:
+              - relationships:
+                  field: salesorderid
+                  to: ref('stg_salesorderheader')
+          - name: productid
+            description: foreign key for product
+            tests:
+              - relationships:
+                  field: productid
+                  to: ref('stg_product')
+
       - name: product
-        description: Main product table
+        description: main product table
         columns:
           - name: productid
             description: primary key of product table
             tests:
               - unique
               - not_null
+          - name: productsubcategoryid
+            description: Foreign key for product subcategory
+            tests:
+              - relationships:
+                  field: productsubcategoryid
+                  to: ref('stg_productsubcategory')
+
       - name: productsubcategory
         description: Subcategory description of all products
         columns:
@@ -131,6 +224,13 @@ sources:
             tests:
               - unique
               - not_null
+          - name: productcategoryid
+            description: Foreign key for product category
+            tests:
+              - relationships:
+                  field: productcategoryid
+                  to: ref('stg_productcategory')
+
       - name: productcategory
         description: Category description of all products
         columns:
@@ -138,9 +238,24 @@ sources:
             description: primary key of product category table
             tests:
               - unique
-              - not_null 
+              - not_null
+
       - name: salesorderheadersalesreason
         description: Table to link sales reason to sales order header
+        columns:
+          - name: salesorderid
+            description: Foreign key for sales order header
+            tests:
+              - relationships:
+                  field: salesorderid
+                  to: ref('stg_salesorderheader')
+          - name: salesreasonid
+            description: Foreign key for sales reason
+            tests:
+              - relationships:
+                  field: salesreasonid
+                  to: ref('stg_salesreason')
+
       - name: salesreason
         description: Table with sales reason information
         columns:
