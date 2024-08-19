@@ -72,7 +72,7 @@ with customers as (
             WHEN stg_salesorderheader.status = 6 THEN 'Cancelled' 
             ELSE 'no_status'
         end as status_description
-        , stg_salesorderheader.orderdate
+        , cast(stg_salesorderheader.orderdate as timestamp) as orderdate
     from stg_salesorderheader
     left join customers on stg_salesorderheader.customerid = customers.customerid
     left join salespersons on stg_salesorderheader.salespersonid = salespersons.salespersonid
