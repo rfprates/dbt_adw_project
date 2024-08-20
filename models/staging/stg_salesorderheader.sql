@@ -9,6 +9,7 @@ with
             , territoryid
             , orderdate
             , status
+            , onlineorderflag
         from {{ source("sap_adw", "salesorderheader") }}
     )
 select *
