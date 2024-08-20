@@ -93,11 +93,11 @@ with customers as (
         , salesorderdetail.unitprice
         , salesorderdetail.orderqty
         , salesorderdetail.revenue
-        , salesorderheader.status_description
         , salesorderheader.orderdate
         , salesorderheader.onlineorderflag
     from salesorderdetail
     left join salesorderheader on salesorderdetail.salesorderid = salesorderheader.salesorderid
+    where salesorderheader.status_description = 'Shipped'
 )
 select *
 from final
