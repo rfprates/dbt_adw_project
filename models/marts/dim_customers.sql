@@ -20,12 +20,6 @@ with
             end as persondescription
         from {{ ref('stg_person') }}
     )
-    , stg_store as (
-        select
-            businessentityid as storeid
-            , store
-        from {{ ref('stg_store') }}
-    )
     , stg_personcreditcard as (
         select
             businessentityid as personcreditcardid
@@ -53,14 +47,11 @@ with
             {{ dbt_utils.generate_surrogate_key(['customerid']) }} as customers_sk  
             , stg_customer.customerid
             , join_person_card.personid
-            , stg_store.storeid
             , join_person_card.fullname
             , join_person_card.persondescription
             , join_person_card.cardtype
-            , stg_store.store
         from stg_customer
         left join join_person_card on stg_customer.personid = join_person_card.personid
-        left join stg_store on stg_customer.storeid = stg_store.storeid
     )
 select *
 from joined
