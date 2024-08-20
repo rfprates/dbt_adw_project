@@ -43,7 +43,7 @@ with customers as (
         , products.products_sk as products_fk
         , stg_salesorderdetail.orderqty
         , stg_salesorderdetail.unitprice
-        , stg_salesorderdetail.unitprice * stg_salesorderdetail.orderqty as revenue
+        , cast(unitprice * orderqty as numeric) as revenue
     from stg_salesorderdetail
     left join products on stg_salesorderdetail.productid = products.productid
 )
@@ -73,6 +73,7 @@ with customers as (
             ELSE 'no_status'
         end as status_description
         , cast(stg_salesorderheader.orderdate as timestamp) as orderdate
+        , stg_salesorderheader.onlineorderflag
     from stg_salesorderheader
     left join customers on stg_salesorderheader.customerid = customers.customerid
     left join salespersons on stg_salesorderheader.salespersonid = salespersons.salespersonid
@@ -94,9 +95,9 @@ with customers as (
         , salesorderdetail.revenue
         , salesorderheader.status_description
         , salesorderheader.orderdate
+        , salesorderheader.onlineorderflag
     from salesorderdetail
     left join salesorderheader on salesorderdetail.salesorderid = salesorderheader.salesorderid
 )
-
 select *
 from final
