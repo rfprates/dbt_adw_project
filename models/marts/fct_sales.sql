@@ -43,7 +43,9 @@ with customers as (
         , products.products_sk as products_fk
         , stg_salesorderdetail.orderqty
         , stg_salesorderdetail.unitprice
+        , stg_salesorderdetail.unitpricediscount
         , cast(unitprice * orderqty as numeric) as revenue
+        , cast(((unitprice*orderqty) - (unitprice*orderqty*unitpricediscount)) as numeric) as revenue_with_discount
     from stg_salesorderdetail
     left join products on stg_salesorderdetail.productid = products.productid
 )
@@ -92,9 +94,14 @@ with customers as (
         , salesorderdetail.salesorderid
         , salesorderdetail.unitprice
         , salesorderdetail.orderqty
+        , salesorderdetail.unitpricediscount
         , salesorderdetail.revenue
+        , salesorderdetail.revenue_with_discount
         , salesorderheader.orderdate
-        , salesorderheader.onlineorderflag
+        , case
+            when salesorderheader.onlineorderflag = false then 'Order placed by sales person'
+            when salesorderheader.onlineorderflag = true then 'Order placed online by customer'
+        end as online_flag
     from salesorderdetail
     left join salesorderheader on salesorderdetail.salesorderid = salesorderheader.salesorderid
     where salesorderheader.status_description = 'Shipped'

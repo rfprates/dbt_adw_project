@@ -6,6 +6,7 @@ with
             , productid
             , unitprice
             , orderqty
+            , unitpricediscount
         from {{ source("sap_adw", "salesorderdetail") }}
     )
 select *
