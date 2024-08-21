@@ -1,25 +1,31 @@
 with
-    stg_sales_order_header_sales_reason as (
+    stg_salesorderheadersalesreason as (
         select
             salesorderid
-            , salesreasonid as salesreason_fk
+            , salesreasonid
         from {{ ref("stg_salesorderheadersalesreason") }}
     )
-    , stg_sales_reason as (
+    , stg_salesreason as (
         select
-            salesreasonid as salesreason_pk
-            , reason_description
-            , reason_type
+            salesreasonid
+            , reason_name
         from {{ ref("stg_salesreason") }}
+    )
+    , reason_by_orderid as (
+        select
+            stg_salesorderheadersalesreason.salesorderid
+            , stg_salesreason.reason_name as reason_name
+        from stg_salesorderheadersalesreason
+        left join stg_salesreason on stg_salesorderheadersalesreason.salesreasonid = stg_salesreason.salesreasonid
     )
     , joined as (
         select
-            {{ dbt_utils.generate_surrogate_key(['salesorderid', 'salesreason_fk']) }} as salesreasons_sk
+            {{ dbt_utils.generate_surrogate_key(['salesorderid']) }} as salesreasons_sk
             , salesorderid
-            , reason_description
-            , reason_type
-        from stg_sales_order_header_sales_reason
-        left join stg_sales_reason on stg_sales_order_header_sales_reason.salesreason_fk = stg_sales_reason.salesreason_pk
+            -- function used to aggregate in one row any multiple reasons attributed to a single salesorderid
+            , string_agg(reason_name, ', ') as reason_name_aggregated
+        from reason_by_orderid
+        group by salesorderid
     )
 select *
 from joined
