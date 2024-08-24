@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: dim_customers
-    description: Dim table of customers/stores
+    description: dim table of customers/stores
     columns:
       - name: customers_sk
         description: the surrogate key of dim customers table
@@ -11,7 +11,7 @@ models:
           - not_null
       
       - name: customerid
-        description: primary key for all customers, persons or stores
+        description: primary key for all customers (persons or stores)
         tests:
           - unique
           - not_null
@@ -23,7 +23,7 @@ models:
         description: primary key for stores
       
       - name: fullname
-        description: the person name
+        description: the person full name
 
       - name: persondescription
         description: primary type of the person
