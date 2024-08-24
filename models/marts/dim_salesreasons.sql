@@ -18,14 +18,14 @@ with
         from stg_salesorderheadersalesreason
         left join stg_salesreason on stg_salesorderheadersalesreason.salesreasonid = stg_salesreason.salesreasonid
     )
-    , joined as (
+    /* final CTE, aggregating in one row any multiple reasons attributed to a single salesorderid */
+    , reason_agg as (
         select
             {{ dbt_utils.generate_surrogate_key(['salesorderid']) }} as salesreasons_sk
             , salesorderid
-            -- function used to aggregate in one row any multiple reasons attributed to a single salesorderid
             , string_agg(reason_name, ', ') as reason_name_aggregated
         from reason_by_orderid
         group by salesorderid
     )
 select *
-from joined
+from reason_agg
