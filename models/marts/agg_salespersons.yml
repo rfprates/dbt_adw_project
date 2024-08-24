@@ -14,7 +14,7 @@ models:
         description: full name of the sales person
       
       - name: jobtitle
-        description: work title such as Buyer or Sales Representative
+        description: work title of each sales person
       
       - name: persondescription
         description: primary type of the person
@@ -44,7 +44,7 @@ models:
         description: quantity of products sold by sales person
       
       - name: best_selling_product
-        description: products with the highest number of items sold by each seller
+        description: products with the highest number of items sold by each sales person
       
       - name: subcategory
         description: the best selling product subcategory
