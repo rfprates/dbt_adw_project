@@ -6,21 +6,59 @@ models:
     columns:
       - name: products_fk
         description: foreign key of dim_products table
+        tests:
+          - relationships:
+              field: products_sk
+              to: ref('dim_products')
 
       - name: customers_fk
         description: foreign key of dim_customers table
+        tests:
+          - relationships:
+              field: customers_sk
+              to: ref('dim_customers')
 
       - name: locations_fk
         description: foreign key of dim_locations table
-
-      - name: salespersons_fk
-        description: foreign key of dim_salespersons table
+        tests:
+          - relationships:
+              field: locations_sk
+              to: ref('dim_locations')
       
       - name: salesreasons_fk
         description: foreign key of dim_salesreasons table
+        tests:
+          - relationships:
+              field: salesreasons_sk
+              to: ref('dim_salesreasons')
       
       - name: salesorderid
-        description: key of each sales order
+        description: foreing key of each sales order
+        tests:
+          - relationships:
+              field: salesorderid
+              to: ref('stg_salesorderheader')
+      
+      - name: productid
+        description: foreign key for product
+        tests:
+          - relationships:
+              field: productid
+              to: ref('stg_product')
+      
+      - name: salespersonid
+        description: Foreign key for sales person
+        tests:
+          - relationships:
+              field: businessentityid
+              to: ref('stg_salesperson')
+      
+      - name: territoryid
+        description: Foreign key for sales territory
+        tests:
+          - relationships:
+              field: territoryid
+              to: ref('stg_salesterritory')
       
       - name: unitprice
         description: unit price of each product sold
@@ -28,11 +66,17 @@ models:
       - name: orderqty
         description: quantity of product on each sale
       
-      - name: revenue
-        description: revenue of each order
+      - name: unitpricediscount
+        description: discount amount of each product sold
       
-      - name: status_description
-        description: order current status
+      - name: revenue
+        description: revenue of each sales order
+      
+      - name: revenue_with_discount
+        description: revenue with unit price discount applied for each sales order
       
       - name: orderdate
         description: date the sales order was created
+      
+      - name: onlineorderflag
+        description: if the sales order was made online or by a sales person
