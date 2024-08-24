@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: agg_salesterritory
+    description: aggregate table with informations about sales territory
+    columns:
+      - name: territoryid
+        description: primary key of sales territory
+        tests:
+          - unique
+          - not_null
+
+      - name: countryregion
+        description: sales territory description
+      
+      - name: territorygroup
+        description: geographic area to which the sales territory belong
+      
+      - name: salesytd
+        description: sales total year to date by sales territory
+
+      - name: saleslastyear
+        description: sales total of previous year by sales territory
+      
+      - name: sales2014
+        description: total sales only in 2014 by sales territory
+      
+      - name: qty_salesorderid
+        description: count of sales order by sales territory
+      
+      - name: qty_sold
+        description: quantity of products sold by sales territory
