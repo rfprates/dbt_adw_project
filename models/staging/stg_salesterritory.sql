@@ -2,7 +2,6 @@ with
     sales_territory as (
         select
             territoryid
-            , countryregioncode
             , name as countryregion
             , `group` as territorygroup
             , salesytd
