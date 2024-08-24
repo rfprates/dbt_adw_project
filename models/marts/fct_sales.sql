@@ -4,12 +4,6 @@ with customers as (
         , customerid
     from {{ ref('dim_customers') }} 
 )
-, salespersons as (
-    select
-        salespersons_sk
-        , salespersonid
-    from {{ ref('dim_salespersons') }}
-)
 , locations as (
     select
         locations_sk
@@ -40,6 +34,7 @@ with customers as (
     select
         stg_salesorderdetail.salesorderdetailid
         , stg_salesorderdetail.salesorderid
+        , stg_salesorderdetail.productid
         , products.products_sk as products_fk
         , stg_salesorderdetail.orderqty
         , stg_salesorderdetail.unitprice
@@ -60,8 +55,9 @@ with customers as (
 , salesorderheader as (
     select
         stg_salesorderheader.salesorderid
+        , stg_salesorderheader.salespersonid
+        , stg_salesorderheader.territoryid
         , customers.customers_sk as customers_fk
-        , salespersons.salespersons_sk as salespersons_fk
         , locations.locations_sk as locations_fk
         , salesreasons.salesreasons_sk as salesreasons_fk
         /* Description added to order_status based on column descriptions */
@@ -78,7 +74,6 @@ with customers as (
         , stg_salesorderheader.onlineorderflag
     from stg_salesorderheader
     left join customers on stg_salesorderheader.customerid = customers.customerid
-    left join salespersons on stg_salesorderheader.salespersonid = salespersons.salespersonid
     left join locations on stg_salesorderheader.shiptoaddressid = locations.addressid
     left join salesreasons on stg_salesorderheader.salesorderid = salesreasons.salesorderid
 )
@@ -89,9 +84,11 @@ with customers as (
         salesorderdetail.products_fk
         , salesorderheader.customers_fk
         , salesorderheader.locations_fk
-        , salesorderheader.salespersons_fk
         , salesorderheader.salesreasons_fk
         , salesorderdetail.salesorderid
+        , salesorderdetail.productid
+        , salesorderheader.salespersonid
+        , salesorderheader.territoryid
         , salesorderdetail.unitprice
         , salesorderdetail.orderqty
         , salesorderdetail.unitpricediscount
