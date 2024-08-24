@@ -14,6 +14,8 @@ sources:
             tests:
               - unique
               - not_null
+          - name: store
+            description: name of each store
 
       - name: customer
         description: main table of customers of Adventure Works
@@ -44,6 +46,14 @@ sources:
             tests:
               - unique
               - not_null
+          - name: firstname
+            description: first name of each person
+          - name: middlename
+            description: middle name of each person
+          - name: lastname
+            description: last name of each person
+          - name: persontype
+            description: person type of each id register on stg_person
 
       - name: personcreditcard
         description: table mapping people to their credit card information
@@ -68,6 +78,8 @@ sources:
             tests:
               - unique
               - not_null
+          - name: cardtype
+            description: name of each credit card registered
 
       - name: employee
         description: table to link  person table with sales person
@@ -77,6 +89,8 @@ sources:
             tests:
               - unique
               - not_null
+          - name: jobtitle
+            description: the job description of each employee
 
       - name: salesperson
         description: Sales person table
@@ -92,6 +106,16 @@ sources:
               - relationships:
                   field: territoryid
                   to: ref('stg_salesterritory')
+          - name: salesquota
+            description: projected yearly sales
+          - name: bonus
+            description: bonus due if quota is met
+          - name: salesytd
+            description: sales total year to date by sales person
+          - name: saleslastyear
+            description: sales total of previous year by sales person
+          - name: comissionpct
+            description: commision percent received per sale
 
       - name: address
         description: table with address information for each sale
@@ -107,6 +131,8 @@ sources:
               - relationships:
                   field: stateprovinceid
                   to: ref('stg_stateprovince')
+          - name: city
+            description: the city name of each addressid
 
       - name: stateprovince
         description: table with name of the state or province for each sale
@@ -122,6 +148,8 @@ sources:
               - relationships:
                   field: countryregioncode
                   to: ref('stg_countryregion')
+          - name: state
+            description: the state or province name of each addressid
 
       - name: countryregion
         description: table with name of the country for each sale
@@ -131,6 +159,8 @@ sources:
             tests:
               - unique
               - not_null
+          - name: country
+            description: the country name of each addressid
 
       - name: salesterritory
         description: Sales territory table
@@ -140,6 +170,20 @@ sources:
             tests:
               - unique
               - not_null
+          - name: countryregioncode
+            description: foreign key for store table
+            tests:
+              - relationships:
+                  field: countryregioncode
+                  to: ref('stg_countryregion')
+          - name: countryregion
+            description: the name of the country if it is outside of USA or the name of the region if it is inside USA
+          - name: territorygroup
+            description: geographic area to which the sales territory belong
+          - name: salesytd
+            description: sales total year to date by sales territory
+          - name: saleslastyear
+            description: sales total of previous year by sales territory
 
       - name: salesorderheader
         description: main table of sales
@@ -179,6 +223,12 @@ sources:
               - relationships:
                   field: territoryid
                   to: ref('stg_salesterritory')
+          - name: orderdate
+            description: date the sales order was created
+          - name: status
+            description: order current status
+          - name: onlineorderflag
+            description: if the sales order was made online or by a sales person
 
       - name: salesorderdetail
         description: table with sales detail
@@ -200,6 +250,12 @@ sources:
               - relationships:
                   field: productid
                   to: ref('stg_product')
+          - name: unitprice
+            description: unit price of each product sold
+          - name: orderqty
+            description: quantity of product on each sale
+          - name: unitpricediscount
+            description: discount amount of each product sold
 
       - name: product
         description: main product table
@@ -209,6 +265,10 @@ sources:
             tests:
               - unique
               - not_null
+          - name: product_name
+            description: the name of product
+          - name: finishedgoodsflag
+            description: if the product is for sale or not
           - name: productsubcategoryid
             description: Foreign key for product subcategory
             tests:
@@ -230,6 +290,8 @@ sources:
               - relationships:
                   field: productcategoryid
                   to: ref('stg_productcategory')
+          - name: name
+            description: the name of the subcategory of the product
 
       - name: productcategory
         description: Category description of all products
@@ -239,6 +301,8 @@ sources:
             tests:
               - unique
               - not_null
+          - name: name
+            description: the name of the category of the product
 
       - name: salesorderheadersalesreason
         description: Table to link sales reason to sales order header
@@ -264,3 +328,5 @@ sources:
             tests:
               - unique
               - not_null
+          - name: reason_name
+            description: description of the reason for purchase
