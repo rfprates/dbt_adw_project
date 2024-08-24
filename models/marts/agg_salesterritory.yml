@@ -11,7 +11,7 @@ models:
           - not_null
 
       - name: countryregion
-        description: sales territory description
+        description: the name of the country if it is outside of USA or the name of the region if it is inside USA
       
       - name: territorygroup
         description: geographic area to which the sales territory belong
