@@ -19,12 +19,6 @@ models:
       - name: product_name
         description: the name of product
 
-      - name: makeflag
-        description: if the product is purchased or manufactured in-house
-
-      - name: finishedgoodsflag
-        description: if the product is for sale or not
-
       - name: subcategory_name
         description: the name of the subcategory of the product
 
