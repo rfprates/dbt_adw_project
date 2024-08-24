@@ -5,6 +5,8 @@ with
             , countryregioncode
             , name as countryregion
             , `group` as territorygroup
+            , salesytd
+            , saleslastyear
         from {{ source("sap_adw", "salesterritory") }}
     )
 select *
