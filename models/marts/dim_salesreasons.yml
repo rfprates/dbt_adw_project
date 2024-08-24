@@ -15,8 +15,5 @@ models:
         tests:
           - not_null
 
-      - name: reason_description
-        description: description of the reason for purchase
-
-      - name: reason_type
-        description: type of reason for each sale
+      - name: reason_name_aggregated
+        description: column to aggregate in one row any multiple reasons attributed to a single salesorderid
