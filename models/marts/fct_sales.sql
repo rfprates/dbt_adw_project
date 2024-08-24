@@ -80,7 +80,7 @@ with
         left join salesreasons on stg_salesorderheader.salesorderid = salesreasons.salesorderid
     )
 
-    /* Join salesorderdetail and salesorderheader to get the final fact table */
+    /* Join salesorderdetail and salesorderheader to get the final fact table with only the sales order that are already Shipped */
     , final as (
         select
             salesorderdetail.products_fk
