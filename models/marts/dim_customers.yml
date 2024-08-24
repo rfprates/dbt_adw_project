@@ -16,12 +16,6 @@ models:
           - unique
           - not_null
       
-      - name: personid
-        description: primary key for persons customers
-      
-      - name: storeid
-        description: primary key for stores
-      
       - name: fullname
         description: the person full name
 
