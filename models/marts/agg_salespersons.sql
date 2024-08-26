@@ -33,7 +33,6 @@ with
     , fct_sales as (
         select
             salespersonid
-            , productid
             , salesorderid
             , orderqty
             , revenue_with_discount
@@ -71,12 +70,26 @@ with
             , category_name
         from {{ ref('dim_products') }}
     )
+    , stg_salesorderheader as (
+        select
+            salesorderid
+            , salespersonid
+        from {{ ref('stg_salesorderheader') }}
+    )
+    , stg_salesorderdetail as (
+        select
+            salesorderid
+            , productid
+            , orderqty
+        from {{ ref('stg_salesorderdetail') }}
+    )
     , count_product as (
         select
             salespersonid
             , productid
             , sum(orderqty) as qtysold
-        from fct_sales
+        from stg_salesorderdetail
+        left join stg_salesorderheader on stg_salesorderdetail.salesorderid = stg_salesorderheader.salesorderid
         group by salespersonid, productid
     )
     , ranking_count_product as (
