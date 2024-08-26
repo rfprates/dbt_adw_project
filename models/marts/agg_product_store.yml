@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: agg_product_store
+    description: aggregate table with all stores registered and the products that were bought on each sales order related to this stores
+    columns:
+      - name: orderdate
+        description: date the sales order was created
+      
+      - name: storeid
+        description: foreign key for store
+        tests:
+          - relationships:
+              field: businessentityid
+              to: ref('stg_store')
+      
+      - name: store
+        description: the store name
+      
+      - name: productid
+        description: foreign key for product
+        tests:
+          - relationships:
+              field: productid
+              to: ref('stg_product')
+      
+      - name: product_name
+        description: the name of product
+      
+      - name: region
+        description: the name of the country if it is outside of USA or the name of the region if it is inside USA
+      
+      - name: country
+        description: the country name of each region
+      
+      - name: orderqty
+        description: quantity of product on each sale
