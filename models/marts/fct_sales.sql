@@ -36,7 +36,6 @@ with
         select
             stg_salesorderdetail.salesorderdetailid
             , stg_salesorderdetail.salesorderid
-            , stg_salesorderdetail.productid
             , products.products_sk as products_fk
             , stg_salesorderdetail.orderqty
             , stg_salesorderdetail.unitprice
@@ -88,7 +87,6 @@ with
             , salesorderheader.locations_fk
             , salesorderheader.salesreasons_fk
             , salesorderdetail.salesorderid
-            , salesorderdetail.productid
             , salesorderheader.salespersonid
             , salesorderheader.territoryid
             , salesorderdetail.unitprice
