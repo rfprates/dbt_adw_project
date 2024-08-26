@@ -52,6 +52,7 @@ with
         select
             {{ dbt_utils.generate_surrogate_key(['customerid']) }} as customers_sk  
             , stg_customer.customerid
+            , stg_customer.storeid
             , join_person_card.fullname
             , join_person_card.persondescription
             , join_person_card.cardtype

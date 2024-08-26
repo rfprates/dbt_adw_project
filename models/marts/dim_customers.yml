@@ -16,6 +16,13 @@ models:
           - unique
           - not_null
       
+      - name: storeid
+        description: foreign key for store
+        tests:
+          - relationships:
+              field: businessentityid
+              to: ref('stg_store')
+
       - name: fullname
         description: the person full name
 
