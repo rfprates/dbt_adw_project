@@ -11,9 +11,11 @@ models:
           - not_null
       
       - name: salesorderid
-        description: foreign key of sales orders
+        description: Foreign key for sales order header
         tests:
-          - not_null
+          - relationships:
+              field: salesorderid
+              to: ref('stg_salesorderheader')
 
       - name: reason_name_aggregated
         description: column to aggregate in one row any multiple reasons attributed to a single salesorderid
