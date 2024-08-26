@@ -3,6 +3,7 @@ with
         select
             territoryid
             , name as countryregion
+            , countryregioncode
             , `group` as territorygroup
             , salesytd
             , saleslastyear
