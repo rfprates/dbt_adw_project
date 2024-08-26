@@ -172,6 +172,12 @@ sources:
               - not_null
           - name: countryregion
             description: the name of the country if it is outside of USA or the name of the region if it is inside USA
+          - name: countryregioncode
+            description: foreign key for store table
+            tests:
+              - relationships:
+                  field: countryregioncode
+                  to: ref('stg_countryregion')
           - name: territorygroup
             description: geographic area to which the sales territory belong
           - name: salesytd
