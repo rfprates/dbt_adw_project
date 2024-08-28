@@ -24,14 +24,14 @@ models:
               field: productid
               to: ref('stg_product')
       
-      - name: product_name
+      - name: product
         description: the name of product
       
-      - name: region
-        description: the name of the country if it is outside of USA or the name of the region if it is inside USA
+      - name: province
+        description: the state or province name of each address
       
       - name: country
-        description: the country name of each region
+        description: the country name of each province
       
       - name: orderqty
         description: quantity of product on each sale

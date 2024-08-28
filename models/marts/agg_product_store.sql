@@ -10,38 +10,24 @@ with
         select
             products_sk
             , productid
-            , product_name
+            , product_name as product
         from {{ ref('dim_products') }}
     )
-    , stg_countryregion as (
+    , dim_locations as (
         select
-            countryregioncode
+            locations_sk
+            , state as province
             , country
-        from {{ ref('stg_countryregion') }}
-    )
-    , stg_salesterritory as (
-        select
-            territoryid
-            , countryregion as region
-            , countryregioncode
-        from {{ ref('stg_salesterritory') }}
+        from {{ ref('dim_locations') }}
     )
     , fct_sales as (
         select
             customers_fk
             , products_fk
-            , territoryid
+            , locations_fk
             , orderqty
             , orderdate
         from {{ ref('fct_sales') }}
-    )
-    , country_region as (
-        select
-            stg_salesterritory.territoryid
-            , stg_salesterritory.region
-            , stg_countryregion.country
-        from stg_salesterritory
-        left join stg_countryregion on stg_salesterritory.countryregioncode = stg_countryregion.countryregioncode
     )
     , agg_model as (
         select
@@ -49,14 +35,14 @@ with
             , dim_customers.storeid
             , dim_customers.store
             , dim_products.productid
-            , dim_products.product_name
-            , country_region.region
-            , country_region.country
+            , dim_products.product
+            , dim_locations.province
+            , dim_locations.country
             , fct_sales.orderqty
         from fct_sales
         left join dim_customers on fct_sales.customers_fk = dim_customers.customers_sk
         left join dim_products on fct_sales.products_fk = dim_products.products_sk
-        left join country_region on fct_sales.territoryid = country_region.territoryid
+        left join dim_locations on fct_sales.locations_fk = dim_locations.locations_sk
         where dim_customers.storeid is not null
         order by orderdate asc
     )
