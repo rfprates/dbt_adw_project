@@ -54,7 +54,7 @@ sources:
             description: last name of each person
           - name: persontype
             description: person type of each id register on stg_person
-          - name: persontype
+          - name: emailpromotions
             description: describes with the person wish to receive e-mail promotions from AdventureWorks or not
 
       - name: emailaddress
@@ -65,7 +65,7 @@ sources:
             tests:
               - unique
               - not_null
-          - name: emailaddress
+          - name: email_address
             description: e-mail address for the person
 
       - name: personcreditcard

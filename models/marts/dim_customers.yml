@@ -28,6 +28,12 @@ models:
 
       - name: persondescription
         description: primary type of the person
+      
+      - name: emailpromotions
+        description: describes with the person wish to receive e-mail promotions from AdventureWorks or not
+
+      - name: email_address
+        description: e-mail address for the person
 
       - name: cardtype
         description: credit card name
