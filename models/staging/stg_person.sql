@@ -6,6 +6,7 @@ with
             , middlename
             , lastname
             , persontype
+            , emailpromotion
         from {{ source("sap_adw", "person") }}
     )
 select *

@@ -54,6 +54,19 @@ sources:
             description: last name of each person
           - name: persontype
             description: person type of each id register on stg_person
+          - name: persontype
+            description: describes with the person wish to receive e-mail promotions from AdventureWorks or not
+
+      - name: emailaddress
+        description: table with informations persons emailaddress
+        columns:
+          - name: businessentityid
+            description: primary key of person
+            tests:
+              - unique
+              - not_null
+          - name: emailaddress
+            description: e-mail address for the person
 
       - name: personcreditcard
         description: table mapping people to their credit card information
