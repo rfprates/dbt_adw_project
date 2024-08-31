@@ -52,7 +52,7 @@ with
             *
         from {{ ref('stg_salesorderheader') }}
     )
-    /* Using stg_salesorderheader to joint with dim_customers, dim_salespersons, dim_locations and dim_salesreasons, saving surrogate keys of each dim tables */
+    /* Using stg_salesorderheader to join with dim_customers, dim_salespersons, dim_locations and dim_salesreasons, saving surrogate keys of each dim tables */
     , salesorderheader as (
         select
             stg_salesorderheader.salesorderid
