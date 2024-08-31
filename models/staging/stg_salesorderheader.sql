@@ -5,7 +5,6 @@ with
             , customerid
             , salespersonid
             , shiptoaddressid
-            , creditcardid
             , territoryid
             , orderdate
             , status

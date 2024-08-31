@@ -224,12 +224,6 @@ sources:
               - relationships:
                   field: addressid
                   to: ref('stg_address')
-          - name: creditcardid
-            description: foreign key for credit card
-            tests:
-              - relationships:
-                  field: creditcardid
-                  to: ref('stg_credticard')
           - name: territoryid
             description: Foreign key for sales territory
             tests:
