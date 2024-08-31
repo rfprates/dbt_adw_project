@@ -39,6 +39,13 @@ models:
               field: salesorderid
               to: ref('stg_salesorderheader')
       
+      - name: customerid
+        description: foreign key for customer
+        tests:
+          - relationships:
+              field: customerid
+              to: ref('dim_customer')
+      
       - name: salespersonid
         description: Foreign key for sales person
         tests:

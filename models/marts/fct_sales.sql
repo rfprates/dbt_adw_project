@@ -56,6 +56,7 @@ with
     , salesorderheader as (
         select
             stg_salesorderheader.salesorderid
+            , stg_salesorderheader.customerid
             , stg_salesorderheader.salespersonid
             , stg_salesorderheader.territoryid
             , customers.customers_sk as customers_fk
@@ -87,6 +88,7 @@ with
             , salesorderheader.locations_fk
             , salesorderheader.salesreasons_fk
             , salesorderdetail.salesorderid
+            , salesorderheader.customerid
             , salesorderheader.salespersonid
             , salesorderheader.territoryid
             , salesorderdetail.unitprice
