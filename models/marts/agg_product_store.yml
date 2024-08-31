@@ -7,22 +7,8 @@ models:
       - name: orderdate
         description: date the sales order was created
       
-      - name: storeid
-        description: foreign key for store
-        tests:
-          - relationships:
-              field: businessentityid
-              to: ref('stg_store')
-      
-      - name: store
+      - name: store_name
         description: the store name
-      
-      - name: productid
-        description: foreign key for product
-        tests:
-          - relationships:
-              field: productid
-              to: ref('stg_product')
       
       - name: product
         description: the name of product
