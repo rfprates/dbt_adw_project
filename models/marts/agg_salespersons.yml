@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: agg_salespersons
+    description: aggregate table with informations about sales persons
+    columns:
+      - name: salespersonid
+        description: primary key of sales person
+        tests:
+          - unique
+          - not_null
+
+      - name: fullname
+        description: full name of the sales person
+      
+      - name: jobtitle
+        description: work title of each sales person
+      
+      - name: persondescription
+        description: primary type of the person
+      
+      - name: salesquota
+        description: projected yearly sales
+
+      - name: bonus
+        description: bonus due if quota is met
+      
+      - name: comissionpct
+        description: commision percent received per sale
+      
+      - name: salesytd
+        description: sales total year to date by sales person
+
+      - name: saleslastyear
+        description: sales total of previous year by sales person
+      
+      - name: sales2014
+        description: total sales only in 2014 by sales person
+      
+      - name: qty_salesorderid
+        description: count of sales order by sales person
+      
+      - name: qty_sold
+        description: quantity of products sold by sales person
+      
+      - name: best_selling_product
+        description: products with the highest number of items sold by each sales person
+      
+      - name: subcategory
+        description: the best selling product subcategory
+      
+      - name: category
+        description: the best selling product category

@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: agg_product_store
+    description: aggregate table with all stores registered and the products that were bought on each sales order related to this stores
+    columns:
+      - name: orderdate
+        description: date the sales order was created
+      
+      - name: store_name
+        description: the store name
+      
+      - name: product
+        description: the name of product
+      
+      - name: province
+        description: the state or province name of each address
+      
+      - name: country
+        description: the country name of each province
+      
+      - name: orderqty
+        description: quantity of product on each sale

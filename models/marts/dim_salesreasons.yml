@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: dim_salesreasons
+    description: dim table with informations about sales reasons
+    columns:
+      - name: salesreasons_sk
+        description: the surrogate key of dim sales reasons table
+        tests:
+          - unique
+          - not_null
+      
+      - name: salesorderid
+        description: Foreign key for sales order header
+        tests:
+          - relationships:
+              field: salesorderid
+              to: ref('stg_salesorderheader')
+
+      - name: reason_name_aggregated
+        description: column to aggregate in one row any multiple reasons attributed to a single salesorderid

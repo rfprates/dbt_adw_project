@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: dim_locations
+    description: dim table of customers locations
+    columns:
+      - name: locations_sk
+        description: the surrogate key of dim locations table
+        tests:
+          - unique
+          - not_null
+      
+      - name: addressid
+        description: primary key of locations
+        tests:
+          - unique
+          - not_null
+        
+      - name: city
+        description: the city name of each addressid
+
+      - name: state
+        description: the state or province name of each addressid
+
+      - name: country
+        description: the country name of each addressid

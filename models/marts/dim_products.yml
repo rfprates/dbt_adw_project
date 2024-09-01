@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: dim_products
+    description: dim table with informations about products
+    columns:
+      - name: products_sk
+        description: surrogate key of products
+        tests:
+          - unique
+          - not_null
+      
+      - name: productid
+        description: primary key of products
+        tests:
+          - unique
+          - not_null
+
+      - name: product_name
+        description: the name of product
+
+      - name: subcategory_name
+        description: the name of the subcategory of the product
+
+      - name: category_name
+        description: the name of the category of the product

@@ -1,0 +1,339 @@
+version: 2
+
+sources:
+  - name: sap_adw
+    database: adw-project-431916
+    schema: sap_adw
+    description: this is Adventure Works SAP database
+    tables:
+      - name: store
+        description: table with informations about the stores that use to buy on Adventure Works
+        columns:
+          - name: businessentityid
+            description: primary key of store
+            tests:
+              - unique
+              - not_null
+          - name: store
+            description: name of each store
+
+      - name: customer
+        description: main table of customers of Adventure Works
+        columns:
+          - name: customerid
+            description: primary key of customers
+            tests:
+              - unique
+              - not_null
+          - name: storeid
+            description: foreign key for store
+            tests:
+              - relationships:
+                  field: businessentityid
+                  to: ref('stg_store')
+          - name: personid
+            description: foreign key for person
+            tests:
+              - relationships:
+                  field: businessentityid
+                  to: ref('stg_person')
+
+      - name: person
+        description: main table of informations about all persons related to Adventure Works, including employees and customers
+        columns:
+          - name: businessentityid
+            description: primary key of person
+            tests:
+              - unique
+              - not_null
+          - name: firstname
+            description: first name of each person
+          - name: middlename
+            description: middle name of each person
+          - name: lastname
+            description: last name of each person
+          - name: persontype
+            description: person type of each id register on stg_person
+          - name: emailpromotions
+            description: describes with the person wish to receive e-mail promotions from AdventureWorks or not
+
+      - name: emailaddress
+        description: table with informations persons emailaddress
+        columns:
+          - name: businessentityid
+            description: primary key of person
+            tests:
+              - unique
+              - not_null
+          - name: email_address
+            description: e-mail address for the person
+
+      - name: personcreditcard
+        description: table mapping people to their credit card information
+        columns:
+          - name: businessentityid
+            description: primary key of person credit card
+            tests:
+              - unique
+              - not_null
+          - name: creditcardid
+            description: Foreign key for credit card
+            tests:
+              - relationships:
+                  field: creditcardid
+                  to: ref('stg_creditcard')
+
+      - name: creditcard
+        description: table with credit card infomation
+        columns:
+          - name: creditcardid
+            description: primary key of credit card
+            tests:
+              - unique
+              - not_null
+          - name: cardtype
+            description: name of each credit card registered
+
+      - name: employee
+        description: table to link  person table with sales person
+        columns:
+          - name: businessentityid
+            description: primary key of employee
+            tests:
+              - unique
+              - not_null
+          - name: jobtitle
+            description: the job description of each employee
+
+      - name: salesperson
+        description: Sales person table
+        columns:
+          - name: businessentityid
+            description: primary key of sales person
+            tests:
+              - unique
+              - not_null
+          - name: territoryid
+            description: foreign key for sales territory
+            tests:
+              - relationships:
+                  field: territoryid
+                  to: ref('stg_salesterritory')
+          - name: salesquota
+            description: projected yearly sales
+          - name: bonus
+            description: bonus due if quota is met
+          - name: salesytd
+            description: sales total year to date by sales person
+          - name: saleslastyear
+            description: sales total of previous year by sales person
+          - name: comissionpct
+            description: commision percent received per sale
+
+      - name: address
+        description: table with address information for each sale
+        columns:
+          - name: addressid
+            description: primary key of address table
+            tests:
+              - unique
+              - not_null
+          - name: stateprovinceid
+            description: Foreign key for state province
+            tests:
+              - relationships:
+                  field: stateprovinceid
+                  to: ref('stg_stateprovince')
+          - name: city
+            description: the city name of each addressid
+
+      - name: stateprovince
+        description: table with name of the state or province for each sale
+        columns:
+          - name: stateprovinceid
+            description: primary key of state province table
+            tests:
+              - unique
+              - not_null
+          - name: countryregioncode
+            description: foreign key for store table
+            tests:
+              - relationships:
+                  field: countryregioncode
+                  to: ref('stg_countryregion')
+          - name: state
+            description: the state or province name of each addressid
+
+      - name: countryregion
+        description: table with name of the country for each sale
+        columns:
+          - name: countryregioncode
+            description: primary key of country region table
+            tests:
+              - unique
+              - not_null
+          - name: country
+            description: the country name of each addressid
+
+      - name: salesterritory
+        description: Sales territory table
+        columns:
+          - name: territoryid
+            description: primary key of sales territory table
+            tests:
+              - unique
+              - not_null
+          - name: countryregion
+            description: the name of the country if it is outside of USA or the name of the region if it is inside USA
+          - name: countryregioncode
+            description: foreign key for store table
+            tests:
+              - relationships:
+                  field: countryregioncode
+                  to: ref('stg_countryregion')
+          - name: territorygroup
+            description: geographic area to which the sales territory belong
+          - name: salesytd
+            description: sales total year to date by sales territory
+          - name: saleslastyear
+            description: sales total of previous year by sales territory
+
+      - name: salesorderheader
+        description: main table of sales
+        columns:
+          - name: salesorderid
+            description: primary key of sales order header table
+            tests:
+              - unique
+              - not_null
+          - name: customerid
+            description: foreign key for customer
+            tests:
+              - relationships:
+                  field: customerid
+                  to: ref('stg_customer')
+          - name: salespersonid
+            description: Foreign key for sales person
+            tests:
+              - relationships:
+                  field: businessentityid
+                  to: ref('stg_salesperson')
+          - name: shiptoaddressid
+            description: foreign key for address
+            tests:
+              - relationships:
+                  field: addressid
+                  to: ref('stg_address')
+          - name: territoryid
+            description: Foreign key for sales territory
+            tests:
+              - relationships:
+                  field: territoryid
+                  to: ref('stg_salesterritory')
+          - name: orderdate
+            description: date the sales order was created
+          - name: status
+            description: order current status
+          - name: onlineorderflag
+            description: if the sales order was made online or by a sales person
+
+      - name: salesorderdetail
+        description: table with sales detail
+        columns:
+          - name: salesorderdetailid
+            description: primary key of sales order detail table
+            tests:
+              - unique
+              - not_null
+          - name: salesorderid
+            description: foreign key for sales order
+            tests:
+              - relationships:
+                  field: salesorderid
+                  to: ref('stg_salesorderheader')
+          - name: productid
+            description: foreign key for product
+            tests:
+              - relationships:
+                  field: productid
+                  to: ref('stg_product')
+          - name: unitprice
+            description: unit price of each product sold
+          - name: orderqty
+            description: quantity of product on each sale
+          - name: unitpricediscount
+            description: discount amount of each product sold
+
+      - name: product
+        description: main product table
+        columns:
+          - name: productid
+            description: primary key of product table
+            tests:
+              - unique
+              - not_null
+          - name: product_name
+            description: the name of product
+          - name: finishedgoodsflag
+            description: if the product is for sale or not
+          - name: productsubcategoryid
+            description: Foreign key for product subcategory
+            tests:
+              - relationships:
+                  field: productsubcategoryid
+                  to: ref('stg_productsubcategory')
+
+      - name: productsubcategory
+        description: Subcategory description of all products
+        columns:
+          - name: productsubcategoryid
+            description: primary key of product subcategory table
+            tests:
+              - unique
+              - not_null
+          - name: productcategoryid
+            description: Foreign key for product category
+            tests:
+              - relationships:
+                  field: productcategoryid
+                  to: ref('stg_productcategory')
+          - name: name
+            description: the name of the subcategory of the product
+
+      - name: productcategory
+        description: Category description of all products
+        columns:
+          - name: productcategoryid
+            description: primary key of product category table
+            tests:
+              - unique
+              - not_null
+          - name: name
+            description: the name of the category of the product
+
+      - name: salesorderheadersalesreason
+        description: Table to link sales reason to sales order header
+        columns:
+          - name: salesorderid
+            description: Foreign key for sales order header
+            tests:
+              - relationships:
+                  field: salesorderid
+                  to: ref('stg_salesorderheader')
+          - name: salesreasonid
+            description: Foreign key for sales reason
+            tests:
+              - relationships:
+                  field: salesreasonid
+                  to: ref('stg_salesreason')
+
+      - name: salesreason
+        description: Table with sales reason information
+        columns:
+          - name: salesreasonid
+            description: primary key of sales reason table
+            tests:
+              - unique
+              - not_null
+          - name: reason_name
+            description: description of the reason for purchase

@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: dim table of customers/stores
+    columns:
+      - name: customers_sk
+        description: the surrogate key of dim customers table
+        tests:
+          - unique
+          - not_null
+      
+      - name: customerid
+        description: primary key for all customers (persons or stores)
+        tests:
+          - unique
+          - not_null
+      
+      - name: storeid
+        description: foreign key for store
+        tests:
+          - relationships:
+              field: businessentityid
+              to: ref('stg_store')
+
+      - name: fullname
+        description: the person full name
+
+      - name: persondescription
+        description: primary type of the person
+      
+      - name: emailpromotions
+        description: describes with the person wish to receive e-mail promotions from AdventureWorks or not
+
+      - name: email_address
+        description: e-mail address for the person
+
+      - name: cardtype
+        description: credit card name
+      
+      - name: store
+        description: the store name
