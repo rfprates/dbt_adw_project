@@ -1,4 +1,7 @@
 /* test created to ensure that revenue colum on fct_sales model is not able to have negative or zero values */
+
+{{ config(severity = 'error') }}
+
 with
     sales as (
         select
