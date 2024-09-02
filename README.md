@@ -73,4 +73,19 @@ Na última página do dashboard, apresenta-se a quantidade de clientes, a distri
 
 ### Machine Learning
 
-As soluções de machine learning estão descritas no notebook *LINK*.
+Na etapa de machine learning, a ideia do projeto era realizar previsões de demanda dos produtos por loja revendedora da Adventure Works. Desta forma, foram adotadas duas metodologias diferentes:
+
+- Modelos de Séries Temporais Hierárquicas
+- Modelo de Regressão
+
+Para acessar as soluções completas e o notebook detalhado de machine learning, acesse este [link](notebook/demand_forecasting.ipynb).
+
+Seguem abaixo os gráficos avaliados em cada uma das abordagens.
+
+#### Série Temporal Hierárquica (AutoARIMA e SeasonalNaive)
+
+![grafico_demandas_hts](images/grafico_demandas_hts.png)
+
+#### Modelo de Regressão (XGBoostRegressor)
+
+![grafico_demandas_xgboost](images/grafico_demandas_xgboost.png)
